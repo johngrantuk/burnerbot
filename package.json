@@ -1,0 +1,20 @@
+{
+	"name": "helloa8",
+	"version": "1.0.0",
+	"description": "example a8 function",
+	"main": "func.js",
+	"author": "",
+	"license": "Apache-2.0",
+	"dependencies": {
+		"@autom8/fdk": "^0.2.5",
+		"@autom8/js-a8-fdk": "^0.3.0",
+		"ethers": "^4.0.27",
+		"web3": "^1.0.0-beta.52"
+	},
+	"devDependencies": {
+		"mocha": "^6.1.4"
+	},
+	"scripts": {
+		"test": "mocha"
+	}
+}

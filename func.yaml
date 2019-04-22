@@ -1,0 +1,10 @@
+schema_version: 20180708
+name: jguk.burnerbot
+version: 0.0.12
+runtime: node
+entrypoint: node func.js
+format: http-stream
+timeout: 30
+idle_timeout: 30
+memory: 128
+build_image: autom8network/node-c:latest
