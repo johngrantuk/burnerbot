@@ -197,19 +197,19 @@ module.exports = {
         },
         {
           "name": "Balance - how much you got?",
-          "value": "a8! jguk.burnerbot balance"
+          "value": "```a8! jguk.burnerbot balance```"
         },
         {
           "name": "Send - spend, spend, spend (remember 1xDai=1$)",
-          "value": "a8! jguk.burnerbot send discordUser xDai-Amount\nExample: a8! jguk.burnerbot send @jguk#9008 1"
+          "value": "```a8! jguk.burnerbot send discordUser xDai-Amount\nExample: a8! jguk.burnerbot send @jguk#9008 1```"
         },
         {
           "name": "Withdraw - Send some to an external wallet",
-          "value": "a8! jguk.burnerbot withdraw address xDai-Amount"
+          "value": "```a8! jguk.burnerbot withdraw address xDai-Amount```"
         },
         {
-          "name": "Burn - burn baby burn 🔥",
-          "value": "a8! jguk.burnerbot balance"
+          "name": "Burn - baby burn 🔥",
+          "value": "This will ditch your account and private key - YOU WILL LOOSE ANY FUNDS IN YOUR CURRENT WALLET! \n```a8! jguk.burnerbot balance```"
         },
         {
           "name": "Info - What is this? And what's your info?",
