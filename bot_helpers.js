@@ -184,20 +184,31 @@ module.exports = {
 
     var embed = {
       "title": "Burner Bot Info",
-      "description": "Stuff about Burner Bot",
-      "url": "https://discordapp.com",
+      "description": "The Burner Bot was made during the The Ethereal Hackathon. The aim was to make something like the [Burner \
+      Wallet](https://github.com/austintgriffith/burner-wallet) which provides a quick and easy way to carry and exchange small amounts of spending-crypto using a \
+      mobile browser but in this case it's done on Discord using [autom8](https://gitlab.com/autom8.network/docs) technology. \
+      Just like the Burner Wallet this version uses xDai Chain for 1:1 with Dai, low gas fees and quick block times.",
+      "url": "https://github.com/johngrantuk/burnerbot",
       "color": 715830,
       "thumbnail": {
         "url": "https://avatars0.githubusercontent.com/u/4797222?s=460&v=4"
       },
       "fields": [
         {
-          "name": "Your Info",
+          "name": "Your Account Info",
           "value": "Your address: " + Address + "\nYour private key: " + PrivateKey
         },
         {
-          "name": "Some things",
-          "value": "Private keys are bad. Burning looses everything."
+          "name": "Getting xDai",
+          "value": "If you have Dai, you can convert it to xDai via POA Network’s [TokenBridge](https://dai-bridge.poa.network/) that connects Ethereum and xDai Chain."
+        },
+        {
+          "name": "Security - Some things to note",
+          "value": "A burner wallet is analogous to cash; you won’t carry too much because it can be lost but it’s astonishingly easy to exchange. \
+          \n\nIncreased convenience comes at a security cost – the “burner” part of the wallet’s name exists to remind users that it’s not secure \
+          for long-term storage. If you use a Burner Wallet, you should regularly sweep funds into a more secure wallet and \
+          burn your Burner Wallet’s private key (you can always make a new one). \
+          \n\nIn this version the private key is stored on a [central server](https://github.com/johngrantuk/burnerbotserver) which isn't cool but it was a quick way to get something going and for now this is just for fun! In the future I think something nice could be done to handle private keys using NuCypher tech."
         }
       ]
     }
