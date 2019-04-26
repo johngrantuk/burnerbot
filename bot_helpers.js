@@ -72,7 +72,7 @@ module.exports = {
     var userName = '@' + Discord.author.username + '#' + Discord.author.discriminator;
     let message;
     let embed = {
-      "description" : "See more info about Burner Bot [here](https://leovoel.github.io/embed-visualizer/)"
+      "description" : "See more info about Burner Bot [here](https://github.com/johngrantuk/burnerbot/)"
     }
 
     if(Input == undefined){
@@ -87,7 +87,7 @@ module.exports = {
     if(inputs[0] == 'balance'){
       var userInfo = await this.get_or_set_user_info(userName);
       var balance = await poa.getBalance(userInfo.info.data.address);
-      message = 'You have ' + balance + 'xDai 👛 You can view your account [here](https://blockscout.com/poa/dai/address/userInfo.info.data.address).';
+      message = 'You have ' + balance + 'xDai 👛 You can view your account [here](https://blockscout.com/poa/dai/address/' + userInfo.info.data.address').';
     }else if(inputs[0] == 'send'){
       // a8! jguk.burnerbot send discordUser xDai-Amount
       if(inputs.length != 3){
@@ -129,7 +129,7 @@ module.exports = {
 
       var userInfo = await this.get_or_set_user_info(userName);
 
-      embed = this.getInfoEmbed(userInfo.info.data.address, userInfo.info.data.privateKey);
+      embed = this.getInfoEmbed(userInfo.info.data.address, userInfo.info.data.privatekey);
     }else{
       embed = this.getMenuEmbed(userName);
     }
