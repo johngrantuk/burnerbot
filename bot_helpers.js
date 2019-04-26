@@ -98,7 +98,7 @@ module.exports = {
 
   parseInput: async function(Input, Discord){
 
-    var userName = '@' + Discord.author.username + '#' + Discord.author.discriminator;
+    var userName = Discord.author.username + '#' + Discord.author.discriminator;
     let message;
     let embed = {
       "description" : "See more info about Burner Bot [here](https://github.com/johngrantuk/burnerbot/)"
@@ -200,7 +200,7 @@ module.exports = {
         },
         {
           "name": "Send - spend, spend, spend (remember 1xDai=1$)",
-          "value": "```a8! jguk.burnerbot send discordUser xDai-Amount\nExample: a8! jguk.burnerbot send @jguk#9008 1```"
+          "value": "```a8! jguk.burnerbot send discordUser xDai-Amount\nExample: a8! jguk.burnerbot send jguk#9008 1```"
         },
         {
           "name": "Withdraw - Send some to an external wallet",
@@ -236,7 +236,7 @@ module.exports = {
       "fields": [
         {
           "name": "Your Account Info",
-          "value": "Your address: " + Address + "\nYour private key: " + PrivateKey
+          "value": "Your address: " + Address, // + "\nYour private key: " + PrivateKey
         },
         {
           "name": "Getting xDai",
