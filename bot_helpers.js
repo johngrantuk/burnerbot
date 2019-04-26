@@ -142,7 +142,6 @@ module.exports = {
       var newWallet = poa.getRandomWallet();
       var temp_hash = poa.hash('this_will_be_changed_in_the_future_to_be_better');
       var register = await server.registerUser(user_hash, temp_hash, newWallet.address, newWallet.privateKey);
-      info.data.address = newWallet.address;
 
       message = 'Your old wallet has been burned 🔥, your new address is: ' + newWallet.address;
 
