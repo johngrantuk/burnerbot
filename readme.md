@@ -4,7 +4,7 @@ Burner Bot is an easy way to transfer xDai inspired by [Burner Wallet](https://g
 
 The Burner Bot was made during the The Ethereal Hackathon. The aim was to make something like the Burner Wallet which provides a quick and easy way to carry and exchange small amounts of spending-crypto using a mobile browser but in this case it's done on Discord using [autom8](https://gitlab.com/autom8.network/docs) technology. Just like the Burner Wallet this version uses xDai Chain for 1:1 with Dai, low gas fees and quick block times.
 
-![Burner Bot](Bot Screen Shot.png)
+![Burner Bot](BotScreenShot.png)
 
 Security - Some things to note",
 A burner wallet is analogous to cash; you won’t carry too much because it can be lost but it’s astonishingly easy to exchange.
