@@ -209,7 +209,7 @@ module.exports = {
         },
         {
           "name": "Burn - baby burn 🔥",
-          "value": "This will ditch your account and private key - YOU WILL LOOSE ANY FUNDS IN YOUR CURRENT WALLET! \n```a8! jguk.burnerbot balance```"
+          "value": "This will give you a new account/private key \nYOU WILL LOOSE ANY FUNDS IN YOUR CURRENT WALLET IF YOU DON'T HAVE NOTE OF THE PRIVATE KEY! \n\n```a8! jguk.burnerbot balance```"
         },
         {
           "name": "Info - What is this? And what's your info?",
