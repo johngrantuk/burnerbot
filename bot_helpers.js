@@ -85,8 +85,9 @@ module.exports = {
     var inputs = Input[0].split(' ');
 
     if(inputs[0] == 'balance'){
-      var balance = '10000'; // get balance from poa
-      message = 'You have ' + balance + 'xDai 👛';
+      var userInfo = await this.get_or_set_user_info(userName);
+      var balance = await poa.getBalance(userInfo.info.data.address);
+      message = 'You have ' + balance + 'xDai 👛 You can view your account [here](https://blockscout.com/poa/dai/address/userInfo.info.data.address).';
     }else if(inputs[0] == 'send'){
       // a8! jguk.burnerbot send discordUser xDai-Amount
       if(inputs.length != 3){
@@ -106,7 +107,7 @@ module.exports = {
       }
 
     }else if(inputs[0] == 'burn'){
-      message = 'burn: ' + Input;
+      message = 'I NEED TO ADD THIS ASAP!';
     }else if(inputs[0] == 'withdraw'){
       // a8! jguk.burnerbot withdraw address xDai-Amount
       if(inputs.length != 3){
@@ -151,7 +152,7 @@ module.exports = {
       },
       "fields": [
         {
-          "name": "COMMANDS",,
+          "name": "COMMANDS",
           "value": "Commands are explained below."
         },
         {
