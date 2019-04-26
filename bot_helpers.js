@@ -39,6 +39,30 @@ module.exports = {
     return {'info': info, 'iscreated': created}
   },
 
+  sendAddress: async function(UserName, ReceiverAddress, DaiAmount){
+
+    info = await this.get_or_set_user_info(UserName);
+
+    if(info.iscreate == true){
+      // won't have any balance
+      return {'status': 'just-created'};
+    }
+
+    var senderBalance = await poa.getBalance(info.info.data.address);
+    if(senderBalance <= 0){
+      // won't have any balance
+      return {'status': 'no-balance'};
+    }
+    if(senderBalance <= DaiAmount){
+      // won't have any balance
+      return {'status': 'not-enough'};
+    }
+
+    await poa.sendDai(info.info.data.address, info.info.data.privatekey, ReceiverAddress, DaiAmount);
+    return {'status': 'ok'};
+
+  },
+
   send: async function(UserName, ReceiverUserName, DaiAmount, isUser){
 
     info = await this.get_or_set_user_info(UserName);
@@ -56,13 +80,18 @@ module.exports = {
       // won't have any balance
       return {'status': 'no-balance'};
     }
+    if(senderBalance <= DaiAmount){
+      // won't have any balance
+      return {'status': 'not-enough'};
+    }
 
-    if(isUser){
+    if(isUser == true){
       receiver_info = await this.get_or_set_user_address(ReceiverUserName);
-      // await poa.sendDai(info.info.data.address, info.info.data.privatekey, receiver_info.info.data.address, DaiAmount);
+      await poa.sendDai(info.info.data.address, info.info.data.privatekey, receiver_info.info.data.address, DaiAmount);
+      // would like to add transaction link here
       return {'status': 'ok', 'newreceiver': receiver_info.iscreate};
     }else{
-      // await poa.sendDai(info.info.data.address, info.info.data.privatekey, ReceiverUserName, DaiAmount);
+      await poa.sendDai(info.info.data.address, info.info.data.privatekey, ReceiverUserName, DaiAmount);
       return {'status': 'ok'};
     }
   },
@@ -87,7 +116,7 @@ module.exports = {
     if(inputs[0] == 'balance'){
       var userInfo = await this.get_or_set_user_info(userName);
       var balance = await poa.getBalance(userInfo.info.data.address);
-      message = 'You have ' + balance + 'xDai 👛 You can view your account [here](https://blockscout.com/poa/dai/address/' + userInfo.info.data.address').';
+      message = 'You have ' + balance + 'xDai 👛 \n\n You can view your account https://blockscout.com/poa/dai/.';
     }else if(inputs[0] == 'send'){
       // a8! jguk.burnerbot send discordUser xDai-Amount
       if(inputs.length != 3){
@@ -101,20 +130,29 @@ module.exports = {
           message = 'You have just started - you need some xDai in your account';
         else if (result.status == 'no-balance')
           message = 'You need some xDai in your account';
+        else if (result.status == 'not-enough')
+          message = "You don't have enough balance to send that amount :tired_face:";
         else {
           message = result.status;
         }
       }
 
     }else if(inputs[0] == 'burn'){
-      message = 'I NEED TO ADD THIS ASAP!';
+      var user_hash = poa.hash(userName);
+      var newWallet = poa.getRandomWallet();
+      var temp_hash = poa.hash('this_will_be_changed_in_the_future_to_be_better');
+      var register = await server.registerUser(user_hash, temp_hash, newWallet.address, newWallet.privateKey);
+      info.data.address = newWallet.address;
+
+      message = 'Your old wallet has been burned 🔥, your new address is: ' + newWallet.address;
+
     }else if(inputs[0] == 'withdraw'){
       // a8! jguk.burnerbot withdraw address xDai-Amount
       if(inputs.length != 3){
         message = '**Incorrect Format** \n\nTry something like: ```a8! jguk.burnerbot withdraw 0x8f80708Cae88d8487A8A270E7a641f16cEEe472e 1```'
       }else{
         // Send message via POA
-        var result = await this.send(userName, inputs[1], inputs[2], false);
+        var result = await this.sendAddress(userName, inputs[1], inputs[2]);
 
         if(result.status == 'ok')
           message = 'You sent ' + inputs[1] + ' ' + inputs[2] + 'xDai 💸';
@@ -122,6 +160,8 @@ module.exports = {
           message = 'You have just started - you need some xDai in your account';
         else if (result.status == 'no-balance')
           message = 'You need some xDai in your account';
+        else if (result.status == 'not-enough')
+          message = "You don't have enough balance to send that amount :tired_face:";
       }
 
     }else if(inputs[0] == 'info'){

@@ -1,6 +1,6 @@
 schema_version: 20180708
 name: jguk.burnerbot
-version: 0.0.39
+version: 0.0.43
 runtime: node
 entrypoint: node func.js
 format: http-stream

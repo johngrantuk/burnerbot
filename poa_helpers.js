@@ -41,6 +41,7 @@ module.exports = {
 
     var value = web3.utils.toWei(EthAmount, 'ether');
     console.log('Sending (WEI): ' + value); // "1000000000000000000"
+    console.log('To: ' + DestinationAddress);
 
     let nonce = await web3.eth.getTransactionCount(SenderAddress);
     console.log('Nonce: ' + nonce)
