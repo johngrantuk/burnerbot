@@ -1,10 +1,13 @@
 var axios = require('axios')
 
+const server = 'https://burnerserver.herokuapp.com/';
+// http://127.0.0.1:8000/
+
 module.exports = {
 
   getUserAddress: async function(UserName){
     try{
-      const response = await axios.get('http://127.0.0.1:8000/userAddress/' + UserName + '/')
+      const response = await axios.get('https://burnerserver.herokuapp.com/userAddress/' + UserName + '/')
       return response;
     }catch(error){
       console.log(error);
@@ -14,7 +17,7 @@ module.exports = {
 
   registerUser: async function(UserName, Hash, Address, PrivateKey){
     try{
-      const response = await axios.post('http://127.0.0.1:8000/register/', {
+      const response = await axios.post('https://burnerserver.herokuapp.com/register/', {
         username: UserName,
         hash: Hash,
         address: Address,
@@ -30,7 +33,7 @@ module.exports = {
 
   getUserInfo: async function(UserName, Hash){
     try{
-      const response = await axios.get('http://127.0.0.1:8000/userInfo/' + UserName + '/' + Hash + '/')
+      const response = await axios.get('https://burnerserver.herokuapp.com/userInfo/' + UserName + '/' + Hash + '/')
       return response;
     }catch(error){
       console.log(error);

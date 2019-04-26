@@ -34,9 +34,8 @@ describe('PoA Network Test', function() {
       console.log(balance1)
       console.log(balance2)
       var amountDollar = '0.01';
-      // '0xCA733c4682d84e9d02F5414Bf361D76d4D833E42', '067d36daacc3d304bd1d4f160bf0b2bfcbdfc28d763f7d695f7ba8262868d3d8'
-      // 297b32d607127b254f06a12867839779a330abf798662d68e40d217ba3876d85
-      await poa.sendDai('0x8f80708cae88d8487a8a270e7a641f16ceee472e', '297b32d607127b254f06a12867839779a330abf798662d68e40d217ba3876d85', '0xCA733c4682d84e9d02F5414Bf361D76d4D833E42', amountDollar);
+
+      await poa.sendDai(add, pk, '0xCA733c4682d84e9d02F5414Bf361D76d4D833E42', amountDollar);
       balance1 = await poa.getBalance("0xCA733c4682d84e9d02F5414Bf361D76d4D833E42");
       balance2 = await poa.getBalance("0x8f80708cae88d8487a8a270e7a641f16ceee472e");
 

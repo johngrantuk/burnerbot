@@ -7,12 +7,14 @@ fdk.handle(function(input){
   let wallet = poa.getRandomWallet();
 
   let pk = wallet.address;
-  // let pk = '?'
 
-  if (input.name) {
-    name = input.name;
+  var id = ""
+  
+  if (input.id){
+    id = input.id
   }
-  return {'message': 'PK: ' + pk}
+
+  return {'message': id + ' PK: ' + pk}
 })
 
 
@@ -23,7 +25,7 @@ fdk.discord(function(result){
   // let pk = '?'
 
     return {
-        "content" : "PK: " + pk,
+        "content" : result.message + " ok? " + result._discord,,
         "embed" : {
           "description" : "[Click here](https://leovoel.github.io/embed-visualizer/) for an example of what you can do in Discord responses."
         }
