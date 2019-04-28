@@ -1,5 +1,6 @@
 var poa = require('./poa_helpers');
 var server = require('./server_helpers');
+var leap = require('./leap_helpers');
 
 module.exports = {
 
@@ -169,7 +170,58 @@ module.exports = {
       var userInfo = await this.get_or_set_user_info(userName);
 
       embed = this.getInfoEmbed(userInfo.info.data.address, userInfo.info.data.privatekey);
-    }else{
+    }else if(inputs[0] == 'sendplasma'){
+      if(inputs.length != 3){
+        message = '**Incorrect Format** \n\nTry something like: ```a8! jguk.burnerbot send jguk#9008 1```'
+      }else{
+
+        if(inputs.length != 3){
+          message = '**Incorrect Format** \n\nTry something like: ```a8! jguk.burnerbot sendplasma jguk#9008 1```'
+        }else{
+          info = await this.get_or_set_user_info(UserName);
+
+          if(info.iscreate == true){
+            // won't have any balance
+            message = 'You have just started - you need some LEAP in your account';
+          }else{
+            // check balance
+            var result = await leap.send(info.info.data.address, info.info.data.privatekey, inputs[1], inputs[2]);
+            message = 'You sent ' + inputs[1] + ' ' + inputs[2] + 'LEAP 💸';
+          }
+        }
+      }
+    }else if(inputs[0] == 'plasmalock'){
+      // a8! jguk.burnerbot plasmalock original_message 1
+      if(inputs.length != 3){
+        message = '**Incorrect Format** \n\nTry something like: ```a8! jguk.burnerbot plasmalock yourcoolmessage 1```'
+      }
+
+      info = await this.get_or_set_user_info(UserName);
+
+      if(info.iscreate == true){
+        // won't have any balance
+        message = 'You have just started - you need some LEAP in your account';
+      }else{
+        var id = await leap.CreateHashLock(inputs[1], info.info.data.address, info.info.data.privatekey, inputs[2]);  // Creates and adds Spending condition to db
+        message = 'Now share with whoever you like: ```a8! jguk.burnerbot plasmaclaim' + id + ' ' + inputs[1] + '```';
+      }
+
+    }else if(inputs[0] == 'plasmaclaim'){
+      //a8! jguk.burnerbot plasmaclaim lock_id message
+      if(inputs.length != 3){
+        message = '**Incorrect Format** \n\nTry something like: ```a8! jguk.burnerbot plasmaclaim 1 yourcoolmessage```'
+      }
+
+      info = await this.get_or_set_user_info(UserName);
+
+      var result = await ClaimHashLock(inputs[1], inputs[1], info.info.data.address);
+
+      message = 'You gave it a shot - now check your balance to see if you got it!';
+
+    }else if(inputs[0] == 'plasmabalance'){
+      // Remember to add!
+    }
+    else{
       embed = this.getMenuEmbed(userName);
     }
 
@@ -211,8 +263,20 @@ module.exports = {
           "value": "This will give you a new account/private key \nYOU WILL LOOSE ANY FUNDS IN YOUR CURRENT WALLET IF YOU DON'T HAVE NOTE OF THE PRIVATE KEY! \n\n```a8! jguk.burnerbot balance```"
         },
         {
-          "name": "Info - What is this? And what's your info?",
-          "value": "a8! jguk.burnerbot info"
+          "name": "Plasma Balance - how much LEAP you got?",
+          "value": "```a8! jguk.burnerbot plasmabalance```"
+        },
+        {
+          "name": "Plasma Send - Send via LEAP via LeapDAO Plasma",
+          "value": "```a8! jguk.burnerbot sendplasma amount\nExample: a8! jguk.burnerbot sendplasma jguk#9008 1```"
+        },
+        {
+          "name": "Create Plasma Hash Lock - A fun way to share some LEAP \nThis locks money under a hash. Anyone knowing the pre-image of the hash is able to send a transaction and claim the funds.",
+          "value": "```a8! jguk.burnerbot plasmalock original_message 1 \nExample: a8! jguk.burnerbot plasmalock havesomeLEAP 1```"
+        },
+        {
+          "name": "Plasma Hash UN-Lock - Claim some LEAP from a hash locked contract.",
+          "value": "```a8! jguk.burnerbot plasmaclaim lock_id message \nExample: a8! jguk.burnerbot plasmaclaim 1 havesomeLEAP```"
         }
       ]
     }
@@ -227,7 +291,8 @@ module.exports = {
       "description": "The Burner Bot was made during the The Ethereal Hackathon. The aim was to make something like the [Burner \
       Wallet](https://github.com/austintgriffith/burner-wallet) which provides a quick and easy way to carry and exchange small amounts of spending-crypto using a \
       mobile browser but in this case it's done on Discord using [autom8](https://gitlab.com/autom8.network/docs) technology. \
-      Just like the Burner Wallet this version uses xDai Chain for 1:1 with Dai, low gas fees and quick block times.",
+      Just like the Burner Wallet this version uses xDai Chain for 1:1 with Dai, low gas fees and quick block times but in this \
+      version it can also make use of LeapDAOs Plasma chain scaling solution to also exchange LEAP. It even demonstrates an example of using their 'spending conditions' to execute smart contract functionality.",
       "url": "https://github.com/johngrantuk/burnerbot",
       "color": 715830,
       "thumbnail": {

@@ -1,8 +1,8 @@
 ## Burner Bot
 
-Burner Bot is an easy way to transfer xDai inspired by [Burner Wallet](https://github.com/austintgriffith/burner-wallet) and built using [autom8](https://gitlab.com/autom8.network/docs).
+Burner Bot is an easy way to transfer xDai or LEAP (from [LeapDAO](https://leapdao.org/)) inspired by [Burner Wallet](https://github.com/austintgriffith/burner-wallet) and built using [autom8](https://gitlab.com/autom8.network/docs).
 
-The Burner Bot was made during the The Ethereal Hackathon. The aim was to make something like the Burner Wallet which provides a quick and easy way to carry and exchange small amounts of spending-crypto using a mobile browser but in this case it's done on Discord using [autom8](https://gitlab.com/autom8.network/docs) technology. Just like the Burner Wallet this version uses xDai Chain for 1:1 with Dai, low gas fees and quick block times.
+The Burner Bot was made during the The Ethereal Hackathon. The aim was to make something like the Burner Wallet which provides a quick and easy way to carry and exchange small amounts of spending-crypto using a mobile browser but in this case it's done on Discord using [autom8](https://gitlab.com/autom8.network/docs) technology. Just like the Burner Wallet this version uses xDai Chain for 1:1 with Dai, low gas fees and quick block times but in this version it can also make use of LeapDAOs Plasma chain scaling solution. It even demonstrates an example of using their 'spending conditions' to execute smart contract functionality.
 
 ![Burner Bot](BotScreenShot.png)
 
